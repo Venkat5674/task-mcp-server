@@ -2,9 +2,9 @@ FROM maven:3.9.11-eclipse-temurin-21 AS build
 WORKDIR /workspace
 COPY pom.xml mvnw mvnw.cmd ./
 COPY .mvn .mvn
-RUN ./mvnw.cmd -B dependency:go-offline
+RUN chmod +x mvnw && ./mvnw -B dependency:go-offline
 COPY src src
-RUN ./mvnw.cmd -B package -DskipTests
+RUN ./mvnw -B package -DskipTests
 
 FROM eclipse-temurin:21-jre
 WORKDIR /app
