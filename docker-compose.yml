@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-taskpilot}
+      POSTGRES_USER: ${POSTGRES_USER:-taskpilot}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-taskpilot}
+    volumes:
+      - taskpilot-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  app:
+    build: .
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+    environment:
+      DATABASE_URL: jdbc:postgresql://postgres:5432/$${POSTGRES_DB}
+      DATABASE_USERNAME: $${POSTGRES_USER}
+      DATABASE_PASSWORD: $${POSTGRES_PASSWORD}
+      JWT_SECRET: $${JWT_SECRET:?Set JWT_SECRET in your environment}
+      AUTH_USERNAME: $${AUTH_USERNAME:-admin}
+      AUTH_PASSWORD: $${AUTH_PASSWORD:?Set AUTH_PASSWORD in your environment}
+    depends_on:
+      postgres:
+        condition: service_healthy
+volumes:
+  taskpilot-data:
