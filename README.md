@@ -94,17 +94,26 @@ Run `mvnw.cmd test` on Windows or `./mvnw test` on Unix systems. The test profil
 
 The project is deployed on Render with Supabase PostgreSQL:
 
-- GitHub: https://github.com/Venkat5674/task-mcp-server
-- Live health check: https://task-mcp-server.onrender.com/actuator/health
-- MCP endpoint: https://task-mcp-server.onrender.com/mcp
+## GitHub: 
+
+```powershell
+   https://github.com/Venkat5674/task-mcp-server
+ ```
+
+## Live health check: 
+
+ ```
+   https://task-mcp-server.onrender.com/actuator/health
+ ```
+
+## MCP endpoint: 
+
+ ```
+   https://task-mcp-server.onrender.com/mcp
+ ```
 
 The live health endpoint returns `{"status":"UP"}` when the service is available. The MCP endpoint uses the same JWT authentication chain as the REST API.
 
-## Resume description
-
-> Built and deployed a production-style task management backend with Spring Boot, PostgreSQL, JWT security, Flyway migrations, Docker, Render, and Model Context Protocol support for AI-agent integration.
-
-The project demonstrates backend API design, database modeling, authentication, validation, cloud deployment, health monitoring, and AI integration readiness.
 
 ## Future improvements
 
