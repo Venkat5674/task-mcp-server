@@ -17,6 +17,19 @@ flowchart LR
 
 Java 21, Spring Boot 4.1.1, Spring AI MCP 2.0.1, Spring Data JPA, PostgreSQL, Flyway, Spring Security, JWT, Actuator, Docker.
 
+## Real-world applications
+
+TaskPilot can serve as a backend for AI-assisted and traditional task workflows:
+
+- Personal productivity applications for creating, prioritizing, and completing tasks.
+- Team project management for tracking features, bugs, deadlines, and release work.
+- Daily planning workflows that summarize pending, completed, and overdue tasks.
+- CRM and support systems for managing customer follow-ups and service actions.
+- Internal company tools that need a secure task API and database-backed persistence.
+- Automation clients such as web dashboards, mobile applications, Slack bots, and scheduled jobs.
+
+The REST API can be used independently by any HTTP client. The MCP surface is ready for integration with AI agents that support Model Context Protocol.
+
 ## Local setup
 
 1. Install Java 21.
@@ -77,7 +90,21 @@ The Streamable HTTP MCP endpoint is `/mcp`. It is protected by the same JWT secu
 
 ## Tests and deployment
 
-Run `mvnw.cmd test` on Windows or `./mvnw test` on Unix systems. The test profile uses an in-memory H2 database; production uses PostgreSQL and Flyway. A Docker-compatible cloud platform should provide a managed PostgreSQL instance, the variables above, and an HTTP health check for `/actuator/health`. A live cloud deployment has not been performed by this repository.
+Run `mvnw.cmd test` on Windows or `./mvnw test` on Unix systems. The test profile uses an in-memory H2 database; production uses PostgreSQL and Flyway. A Docker-compatible cloud platform should provide a managed PostgreSQL instance, the variables above, and an HTTP health check for `/actuator/health`.
+
+The project is deployed on Render with Supabase PostgreSQL:
+
+- GitHub: https://github.com/Venkat5674/task-mcp-server
+- Live health check: https://task-mcp-server.onrender.com/actuator/health
+- MCP endpoint: https://task-mcp-server.onrender.com/mcp
+
+The live health endpoint returns `{"status":"UP"}` when the service is available. The MCP endpoint uses the same JWT authentication chain as the REST API.
+
+## Resume description
+
+> Built and deployed a production-style task management backend with Spring Boot, PostgreSQL, JWT security, Flyway migrations, Docker, Render, and Model Context Protocol support for AI-agent integration.
+
+The project demonstrates backend API design, database modeling, authentication, validation, cloud deployment, health monitoring, and AI integration readiness.
 
 ## Future improvements
 
